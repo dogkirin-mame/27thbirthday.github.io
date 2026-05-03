@@ -25,10 +25,10 @@ const ADMIN_PW = "kirin2025";
 // 最初に表示するほしいもの
 const INITIAL_WISHES = [
   {
-    emoji: "✈️",
-    name: "旅行資金",
-    desc: "次の旅の航空券・ホテル代にします",
-    price: 30000
+    emoji: "👟",
+    name: "ナイキペガサス42",
+    desc: "ランニング、頑張ってます。https://www.nike.com/jp/t/%E3%83%8A%E3%82%A4%E3%82%AD-%E3%83%9A%E3%82%AC%E3%82%B5%E3%82%B9-42-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%A9%E3%83%B3%E3%83%8B%E3%83%B3%E3%82%B0%E3%82%B7%E3%83%A5%E3%83%BC%E3%82%BA-ghM0LOBj/IB1881-113?productId=1015874418&gtin=00198729684295&dplnk=member&cp=13696286696_search_--x-20547491681---c-----9155187-101587441800198729684295&gclsrc=aw.ds&gad_source=1&gad_campaignid=19663886286&gbraid=0AAAAADpeLdpX0YgdWCQftoN5psmhejEd2&gclid=CjwKCAjw5NvPBhAoEiwA_2egfvX9m-v7cOl2cVc93Ttx8EJTm_S24IXacG0tcZY69VpraK-XM2oW2hoC5CcQAvD_BwE",
+    price: 17600
   },
   {
     emoji: "👗",
