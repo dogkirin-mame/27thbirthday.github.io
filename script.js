@@ -10,6 +10,15 @@
 // 自分のPayPay送金リンクに変更してください
 const PAYPAY_URL = "hhttps://qr.paypay.ne.jp/p2p01_Iw2xyAk7lRRpHVdg";
 
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSee82Dkd_YCmuweD2APcuxBSkEafyqygOCqhFi5rcdbIEXHPQ/formResponse";
+
+const GOOGLE_FORM_ENTRIES = {
+  name: "entry.1840915406",
+  gift: "entry.1734151611",
+  amount: "entry.571732542",
+  message: "entry.1966187163"
+};
+
 // 管理者ページのパスワード
 const ADMIN_PW = "kirin2025";
 
@@ -301,6 +310,7 @@ function doPayPay() {
   const selectedWish = selectedIdx >= 0 ? wishes[selectedIdx] : null;
   const wishName = selectedWish ? selectedWish.name : "未選択";
 
+  // 自分のブラウザにも保存
   pledges.push({
     name: senderName,
     amt: currentAmt,
@@ -312,15 +322,25 @@ function doPayPay() {
 
   saveData();
 
+  // Googleフォームに自動送信
+  sendToGoogleForm({
+    name: senderName,
+    gift: wishName,
+    amount: currentAmt,
+    message: message
+  });
+
+  // サンクス画面表示
   document.getElementById("main").style.display = "none";
   document.getElementById("thanks").classList.add("show");
 
   renderWishes();
   renderAdmin();
 
+  // PayPayを開く
   setTimeout(() => {
     window.open(PAYPAY_URL, "_blank");
-  }, 300);
+  }, 500);
 }
 
 function goBack() {
@@ -457,3 +477,20 @@ document.addEventListener("DOMContentLoaded", () => {
   renderWishes();
   updateAmountDisplay();
 });
+
+function sendToGoogleForm({ name, gift, amount, message }) {
+  const formData = new FormData();
+
+  formData.append(GOOGLE_FORM_ENTRIES.name, name);
+  formData.append(GOOGLE_FORM_ENTRIES.gift, gift);
+  formData.append(GOOGLE_FORM_ENTRIES.amount, amount);
+  formData.append(GOOGLE_FORM_ENTRIES.message, message);
+
+  fetch(GOOGLE_FORM_ACTION_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  }).catch((error) => {
+    console.error("Googleフォーム送信エラー:", error);
+  });
+}
