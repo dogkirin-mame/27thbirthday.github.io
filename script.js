@@ -8,7 +8,7 @@
 /* ===== 設定 ===== */
 
 // 自分のPayPay送金リンクに変更してください
-const PAYPAY_URL = "hhttps://qr.paypay.ne.jp/p2p01_Iw2xyAk7lRRpHVdg";
+const PAYPAY_URL = "https://qr.paypay.ne.jp/p2p01_Iw2xyAk7lRRpHVdg";
 
 const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSee82Dkd_YCmuweD2APcuxBSkEafyqygOCqhFi5rcdbIEXHPQ/formResponse";
 
