@@ -1,0 +1,865 @@
+/* =============================================
+   KIRIN Birthday Crowdfunding — style.css
+   初心者向け：
+   色を変えたい場合は、まず下の :root の色だけ変えればOKです。
+   ============================================= */
+
+:root {
+  --pink: #d4537e;
+  --pink-light: #fbeaf0;
+  --pink-border: #f4c0d1;
+  --pink-dark: #993556;
+
+  --paypay-red: #ff0033;
+  --green: #3b6d11;
+  --green-light: #c0dd97;
+  --green-dark: #27500a;
+
+  --text: #1a1a1a;
+  --text-muted: #6b7280;
+  --bg: #ffffff;
+  --bg-soft: #fbf7f9;
+  --border: #eadfe5;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-soft: 0 10px 30px rgba(153, 53, 86, 0.08);
+  --font: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== 基本設定 ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(180deg, #fff7fb 0%, #fff 45%, #fff7fb 100%);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page-shell {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ===== 管理者ボタン ===== */
+
+.admin-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px 0;
+}
+
+.admin-link {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 11px;
+  transition: 0.15s ease;
+}
+
+.admin-link:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+/* ===== ヒーロー ===== */
+
+.hero {
+  text-align: center;
+  padding: 28px 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--pink-border);
+  color: #72243e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 6vw, 30px);
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ===== 共通レイアウト ===== */
+
+.main,
+.admin-panel {
+  background: var(--bg);
+}
+
+.section {
+  padding: 20px 16px;
+}
+
+.section--compact {
+  padding-top: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-title--mb {
+  display: block;
+  margin: 0 0 10px;
+}
+
+.edit-btn {
+  border: 1px solid var(--pink);
+  background: transparent;
+  color: var(--pink);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: 0.15s ease;
+}
+
+.edit-btn:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+/* ===== ほしいもの ===== */
+
+.wish-list {
+  display: grid;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 34px 16px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  background: var(--bg-soft);
+}
+
+.empty-icon {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.wish-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  padding: 12px;
+  transition: 0.15s ease;
+}
+
+.wish-card:hover {
+  box-shadow: 0 5px 18px rgba(212, 83, 126, 0.09);
+}
+
+.wish-card.selected {
+  border: 2px solid var(--pink);
+  background: var(--pink-light);
+}
+
+.wish-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-dot {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+}
+
+.wish-card.selected .radio-dot {
+  border-color: var(--pink);
+}
+
+.radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pink);
+  transform: scale(0);
+  transition: 0.15s ease;
+}
+
+.wish-card.selected .radio-inner {
+  transform: scale(1);
+}
+
+.wish-emoji {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  font-size: 22px;
+}
+
+.wish-card.selected .wish-emoji {
+  background: var(--pink-border);
+}
+
+.wish-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.wish-name {
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.wish-desc {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wish-right {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.wish-pct {
+  display: block;
+  color: var(--pink-dark);
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.wish-price {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.del-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px;
+}
+
+.del-btn:hover {
+  color: #e24b4a;
+}
+
+.complete-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 10px;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+.progress-wrap {
+  margin-top: 10px;
+}
+
+.progress-track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--bg-soft);
+}
+
+.wish-card.selected .progress-track {
+  background: var(--pink-border);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: var(--pink);
+  transition: width 0.45s ease;
+}
+
+.progress-fill.full {
+  background: var(--green);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.collected-label {
+  color: var(--pink-dark);
+  font-weight: 900;
+}
+
+/* ===== 追加フォーム ===== */
+
+.add-form-wrap {
+  margin-top: 10px;
+}
+
+.add-form {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+}
+
+.add-form input,
+.name-card input,
+.amount-input-row,
+.msg,
+.admin-login input {
+  border: 1px solid var(--border);
+  background: #fff;
+  outline: none;
+  transition: 0.15s ease;
+}
+
+.add-form input:focus,
+.name-card input:focus,
+.amount-input-row:focus-within,
+.msg:focus,
+.admin-login input:focus {
+  border-color: var(--pink);
+}
+
+.add-form input {
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.add-row {
+  display: flex;
+  gap: 8px;
+}
+
+.add-row input {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.add-submit {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--pink);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* ===== 応援金額 ===== */
+
+.amount-card,
+.name-card {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+}
+
+.amount-card {
+  margin-bottom: 14px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  transition: 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+.chip.active {
+  border-color: var(--pink);
+  background: var(--pink);
+  color: #fff;
+}
+
+.amount-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+}
+
+.amount-input-row span {
+  color: var(--text-muted);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.amount-input-row input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 11px 0;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.amount-input-row input::-webkit-outer-spin-button,
+.amount-input-row input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.total-label {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.total-amt {
+  color: var(--pink-dark);
+  font-size: 22px;
+}
+
+.name-card {
+  margin-bottom: 14px;
+}
+
+.name-card label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.name-card input {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  padding: 11px 12px;
+  font-size: 15px;
+}
+
+.msg {
+  display: block;
+  width: 100%;
+  resize: none;
+  border-radius: var(--radius-md);
+  padding: 11px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ===== PayPay ===== */
+
+.paypay-btn {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--paypay-red);
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  font-size: 17px;
+  font-weight: 900;
+  box-shadow: 0 8px 24px rgba(255, 0, 51, 0.22);
+  transition: 0.12s ease;
+}
+
+.paypay-btn:hover {
+  opacity: 0.93;
+}
+
+.paypay-btn:active {
+  transform: scale(0.98);
+}
+
+.paypay-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.pp-logo {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  background: #fff;
+  color: var(--paypay-red);
+  padding: 2px 7px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.footer-note {
+  margin: 0;
+  padding: 0 16px 28px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* ===== サンクス画面 ===== */
+
+.thanks {
+  display: none;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.thanks.show {
+  display: block;
+}
+
+.thanks-icon {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 52px;
+}
+
+.thanks h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.thanks p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.back-btn {
+  margin-top: 24px;
+  border: 1px solid var(--pink);
+  background: transparent;
+  color: var(--pink);
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.back-btn:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+/* ===== 管理者パネル ===== */
+
+.admin-panel {
+  display: none;
+  padding: 20px 16px 32px;
+}
+
+.admin-login {
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+}
+
+.admin-login p {
+  margin: 0 0 14px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.admin-login input {
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+}
+
+.admin-login-btn {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--pink);
+  color: #fff;
+  padding: 12px;
+  font-weight: 900;
+}
+
+.admin-err {
+  min-height: 18px;
+  margin-top: 8px !important;
+  color: #e24b4a !important;
+  font-size: 12px !important;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.admin-logout {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.admin-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.stat-label {
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.stat-val {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.stat-val.pink {
+  color: var(--pink-dark);
+}
+
+.wish-group-title {
+  margin: 16px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.pledge-item {
+  margin-bottom: 8px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.pledge-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.pledge-name,
+.pledge-amt {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.pledge-amt {
+  color: var(--pink-dark);
+}
+
+.pledge-detail,
+.pledge-msg,
+.pledge-del {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.pledge-msg {
+  margin-top: 6px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.pledge-del {
+  display: inline-block;
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.pledge-del:hover {
+  color: #e24b4a;
+}
+
+.no-pledges {
+  padding: 32px 10px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ===== スマホ対応 ===== */
+
+@media (max-width: 420px) {
+  .page-shell {
+    box-shadow: none;
+  }
+
+  .hero {
+    padding: 24px 16px 20px;
+  }
+
+  .section {
+    padding-inline: 14px;
+  }
+
+  .chips {
+    gap: 5px;
+  }
+
+  .chip {
+    padding: 6px 11px;
+    font-size: 12px;
+  }
+
+  .wish-card-top {
+    gap: 8px;
+  }
+
+  .wish-emoji {
+    width: 38px;
+    height: 38px;
+  }
+
+  .paypay-btn {
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  .admin-summary {
+    gap: 8px;
+  }
+}

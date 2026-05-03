@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIRINのほしい物リスト 🦒</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+
+    <!-- 管理者ボタン -->
+    <div class="admin-bar">
+      <button class="admin-link" type="button" onclick="toggleAdmin()">管理者ページ</button>
+    </div>
+
+    <!-- ヒーロー -->
+    <header class="hero">
+      <span class="badge">🎂 Birthday Crowdfunding</span>
+      <h1>KIRINのほしい物リスト</h1>
+      <p>
+        誕生日プレゼントをクラファン形式でみんなにお願いしてみます！<br />
+        気になるものを選んで、任意の金額を贈ってね〜🦒
+      </p>
+    </header>
+
+    <!-- メイン -->
+    <main id="main" class="main">
+
+      <!-- ほしいもの -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">ほしいもの</span>
+          <button class="edit-btn" id="editToggle" type="button" onclick="toggleEdit()">＋ 追加・編集</button>
+        </div>
+
+        <div id="wishList" class="wish-list"></div>
+
+        <!-- 追加フォーム -->
+        <div id="addForm" class="add-form-wrap" hidden>
+          <div class="add-form">
+            <input type="text" id="newEmoji" placeholder="絵文字（例：👟）" />
+            <input type="text" id="newName" placeholder="アイテム名（例：Nike Air Max）" />
+            <input type="text" id="newDesc" placeholder="ひとこと説明（任意）" />
+
+            <div class="add-row">
+              <input type="number" id="newPrice" placeholder="目標金額 ¥" min="0" />
+              <button class="add-submit" type="button" onclick="addWish()">追加</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 応援金額 -->
+      <section class="section section--compact">
+        <p class="section-title section-title--mb">応援金額</p>
+
+        <div class="amount-card">
+          <div class="chips" aria-label="金額を選択">
+            <button class="chip" type="button" onclick="setChip(500, this)">¥500</button>
+            <button class="chip active" type="button" onclick="setChip(1000, this)">¥1,000</button>
+            <button class="chip" type="button" onclick="setChip(3000, this)">¥3,000</button>
+            <button class="chip" type="button" onclick="setChip(5000, this)">¥5,000</button>
+            <button class="chip" type="button" onclick="setChip(10000, this)">¥10,000</button>
+          </div>
+
+          <label class="amount-input-row">
+            <span>¥</span>
+            <input type="number" id="amtInput" value="1000" min="1" inputmode="numeric" oninput="onAmt()" />
+          </label>
+
+          <div class="total-row">
+            <span class="total-label">贈る金額</span>
+            <strong class="total-amt" id="totalDisp">¥1,000</strong>
+          </div>
+        </div>
+
+        <!-- 名前 -->
+        <div class="name-card">
+          <label for="senderName">あなたの名前（管理者に記録されます）</label>
+          <input type="text" id="senderName" placeholder="例：田中 / 匿名でもOK" />
+        </div>
+
+        <!-- メッセージ -->
+        <p class="section-title section-title--mb">メッセージ（任意）</p>
+        <textarea class="msg" rows="3" id="msgInput" placeholder="お誕生日おめでとう！🎉"></textarea>
+      </section>
+
+      <!-- PayPayボタン -->
+      <section class="section section--compact">
+        <button class="paypay-btn" id="payBtn" type="button" onclick="doPayPay()">
+          <span class="pp-logo">PayPay</span>
+          <span id="btnLabel">¥1,000 を贈る</span>
+        </button>
+      </section>
+
+      <p class="footer-note">
+        PayPayアプリで送金が完了します。<br />
+        贈り物はKIRINに届きます💌
+      </p>
+    </main>
+
+    <!-- サンクス画面 -->
+    <div class="thanks" id="thanks" aria-live="polite">
+      <span class="thanks-icon">🎉</span>
+      <h2>ありがとう！</h2>
+      <p>
+        PayPayアプリが開きます。<br />
+        送金を完了してKIRINを喜ばせよう🥳
+      </p>
+      <button class="back-btn" type="button" onclick="goBack()">← 戻る</button>
+    </div>
+
+    <!-- 管理者パネル -->
+    <aside class="admin-panel" id="adminPanel">
+      <div id="adminLogin">
+        <div class="admin-login">
+          <p>管理者パスワードを入力してください</p>
+          <input
+            type="password"
+            id="pwInput"
+            placeholder="••••••"
+            onkeydown="if(event.key === 'Enter') adminLogin()"
+          />
+          <button class="admin-login-btn" type="button" onclick="adminLogin()">ログイン</button>
+          <p class="admin-err" id="pwErr"></p>
+        </div>
+      </div>
+
+      <div id="adminDash" hidden>
+        <div class="admin-header">
+          <h2>管理者ダッシュボード</h2>
+          <button class="admin-logout" type="button" onclick="adminLogout()">ログアウト</button>
+        </div>
+
+        <div class="admin-summary" id="adminSummary"></div>
+
+        <div class="section-title section-title--mb">支援一覧</div>
+        <div id="pledgeList"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
