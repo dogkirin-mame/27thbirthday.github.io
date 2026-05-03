@@ -310,6 +310,7 @@ function doPayPay() {
   const selectedWish = selectedIdx >= 0 ? wishes[selectedIdx] : null;
   const wishName = selectedWish ? selectedWish.name : "未選択";
 
+  // 自分のブラウザにも保存
   pledges.push({
     name: senderName,
     amt: currentAmt,
@@ -329,16 +330,18 @@ function doPayPay() {
     message: message
   });
 
+  // 画面表示を変更
   document.getElementById("main").style.display = "none";
   document.getElementById("thanks").classList.add("show");
 
   renderWishes();
   renderAdmin();
 
-  // Googleフォーム送信の時間を少し確保してからPayPayへ
+  // PayPayへ移動
+  // window.open ではなく、同じタブで移動する方がスマホで安定します
   setTimeout(() => {
-    window.open(PAYPAY_URL, "_blank");
-  }, 1200);
+    window.location.href = PAYPAY_URL;
+  }, 800);
 }
 
 function goBack() {
