@@ -349,6 +349,7 @@ function goBack() {
   renderWishes();
 }
 
+
 /* ===== 管理者ページ ===== */
 
 function toggleAdmin() {
