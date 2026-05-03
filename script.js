@@ -310,7 +310,6 @@ function doPayPay() {
   const selectedWish = selectedIdx >= 0 ? wishes[selectedIdx] : null;
   const wishName = selectedWish ? selectedWish.name : "未選択";
 
-  // 自分のブラウザにも保存
   pledges.push({
     name: senderName,
     amt: currentAmt,
@@ -322,7 +321,7 @@ function doPayPay() {
 
   saveData();
 
-  // Googleフォームに自動送信
+  // Googleフォームへ送信
   sendToGoogleForm({
     name: senderName,
     gift: wishName,
@@ -330,17 +329,16 @@ function doPayPay() {
     message: message
   });
 
-  // サンクス画面表示
   document.getElementById("main").style.display = "none";
   document.getElementById("thanks").classList.add("show");
 
   renderWishes();
   renderAdmin();
 
-  // PayPayを開く
+  // Googleフォーム送信の時間を少し確保してからPayPayへ
   setTimeout(() => {
     window.open(PAYPAY_URL, "_blank");
-  }, 500);
+  }, 1200);
 }
 
 function goBack() {
@@ -480,18 +478,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function sendToGoogleForm({ name, gift, amount, message }) {
-  const formData = new FormData();
+  const iframeName = "hidden_google_form_iframe";
 
-  formData.append(GOOGLE_FORM_ENTRIES.name, name);
-  formData.append(GOOGLE_FORM_ENTRIES.gift, gift);
-  formData.append(GOOGLE_FORM_ENTRIES.amount, amount);
-  formData.append(GOOGLE_FORM_ENTRIES.message, message);
+  let iframe = document.getElementById(iframeName);
 
-  fetch(GOOGLE_FORM_ACTION_URL, {
-    method: "POST",
-    mode: "no-cors",
-    body: formData
-  }).catch((error) => {
-    console.error("Googleフォーム送信エラー:", error);
+  if (!iframe) {
+    iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.id = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+  }
+
+  const form = document.createElement("form");
+  form.action = GOOGLE_FORM_ACTION_URL;
+  form.method = "POST";
+  form.target = iframeName;
+  form.style.display = "none";
+
+  const fields = {
+    [GOOGLE_FORM_ENTRIES.name]: name,
+    [GOOGLE_FORM_ENTRIES.gift]: gift,
+    [GOOGLE_FORM_ENTRIES.amount]: String(amount),
+    [GOOGLE_FORM_ENTRIES.message]: message
+  };
+
+  Object.entries(fields).forEach(([entryId, value]) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = entryId;
+    input.value = value;
+    form.appendChild(input);
   });
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    form.remove();
+  }, 1000);
 }
