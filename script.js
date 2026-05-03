@@ -8,7 +8,7 @@
 /* ===== 設定 ===== */
 
 // 自分のPayPay送金リンクに変更してください
-const PAYPAY_URL = "https://qr.paypay.ne.jp/p2p01_JEK7F1748FNk2t2P";
+const PAYPAY_URL = "hhttps://qr.paypay.ne.jp/p2p01_Iw2xyAk7lRRpHVdg";
 
 // 管理者ページのパスワード
 const ADMIN_PW = "kirin2025";
