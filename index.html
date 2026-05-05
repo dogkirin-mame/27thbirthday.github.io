@@ -114,39 +114,24 @@
     </main>
 
     <!-- サンクス画面 -->
-       <aside class="admin-panel" id="adminPanel">
+<div class="thanks" id="thanks">
+  <span class="thanks-icon">🎉</span>
+  <h2>支援内容を記録しました！</h2>
+  <p>
+    次にPayPayで送金をお願いします。<br>
+    下のボタンを押すとPayPayが開きます🥳
+  </p>
 
-    <!-- 管理者パネル -->
-    <aside class="admin-panel" id="adminPanel">
-      <div id="adminLogin">
-        <div class="admin-login">
-          <p>管理者パスワードを入力してください</p>
-          <input
-            type="password"
-            id="pwInput"
-            placeholder="••••••"
-            onkeydown="if(event.key === 'Enter') adminLogin()"
-          />
-          <button class="admin-login-btn" type="button" onclick="adminLogin()">ログイン</button>
-          <p class="admin-err" id="pwErr"></p>
-        </div>
-      </div>
+  <button class="paypay-btn" type="button" onclick="openPayPay()" style="margin-top: 20px;">
+    <span class="pp-logo">PayPay</span>
+    <span>PayPayを開く</span>
+  </button>
 
-      <div id="adminDash" hidden>
-        <div class="admin-header">
-          <h2>管理者ダッシュボード</h2>
-          <button class="admin-logout" type="button" onclick="adminLogout()">ログアウト</button>
-        </div>
+  <button class="back-btn" type="button" onclick="goBack()">← 戻る</button>
+</div>
 
-        <div class="admin-summary" id="adminSummary"></div>
-
-        <div class="section-title section-title--mb">支援一覧</div>
-        <div id="pledgeList"></div>
-      </div>
-    </aside>
-
-  </div>
-
+<!-- 管理者パネル -->
+<aside class="admin-panel" id="adminPanel">
   <!-- JavaScript -->
 <script src="script.js?v=2"></script>
 </body>
