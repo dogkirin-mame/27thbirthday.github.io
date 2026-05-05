@@ -57,7 +57,7 @@ const INITIAL_WISHES = [
 {
     emoji: "🏃",
     name: "運動用の服！",
-    desc: "最近運動してる風で服ないんかいっ。ないねん。",
+    desc: "最近運動してる風で服ないねん。",
     price: 10000
   },
   {
