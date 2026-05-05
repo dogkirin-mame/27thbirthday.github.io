@@ -38,6 +38,13 @@ const INITIAL_WISHES = [
   }
 ];
 
+// 手動で反映したい「集まった金額」
+// プレゼント名と完全一致させてください
+const MANUAL_COLLECTED_BY_WISH_NAME = {
+  "ナイキペガサス42": 0,
+  "研究・本代": 0
+};
+
 /* ===== ここから下は、慣れるまでは触らなくてOK ===== */
 
 const WISH_KEY = "kirin_birthday_wishes_v1";
@@ -96,9 +103,19 @@ function escapeHtml(value) {
 }
 
 function collectedFor(index) {
-  return pledges
+  const wish = wishes[index];
+
+  if (!wish) return 0;
+
+  // あなたが手動でscript.jsに入力した金額
+  const manualCollected = Number(MANUAL_COLLECTED_BY_WISH_NAME[wish.name] || 0);
+
+  // その端末で押された支援記録
+  const localCollected = pledges
     .filter((pledge) => pledge.wishIdx === index)
     .reduce((sum, pledge) => sum + Number(pledge.amt || 0), 0);
+
+  return manualCollected + localCollected;
 }
 
 function percentFor(wish, index) {
