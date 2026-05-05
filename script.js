@@ -76,7 +76,7 @@ const MANUAL_COLLECTED_BY_WISH_NAME = {
   "アラビア　Paratiisi Plate": 0,
   "アイシャドウ": 0,
   "ルームディフーザー": 0,
-  "運動用の服！": 3000,
+  "運動用の服！": 10000,
   "モニター": 0
 };
 
