@@ -71,7 +71,7 @@ const INITIAL_WISHES = [
 // 手動で反映したい「集まった金額」
 // プレゼント名と完全一致させてください
 const MANUAL_COLLECTED_BY_WISH_NAME = {
-  "ナイキペガサス42": 1000,
+  "ナイキペガサス42": 11000,
   "NARS アフターグローリキッドブラッシュ": 0,
   "アラビア　Paratiisi Plate": 0,
   "アイシャドウ": 0,
