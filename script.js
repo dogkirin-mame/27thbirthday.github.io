@@ -82,8 +82,8 @@ const MANUAL_COLLECTED_BY_WISH_NAME = {
 
 /* ===== ここから下は、慣れるまでは触らなくてOK ===== */
 
-const WISH_KEY = "kirin_birthday_wishes_v1";
-const PLEDGE_KEY = "kirin_birthday_pledges_v1";
+const WISH_KEY = "kirin_birthday_wishes_v2";
+const PLEDGE_KEY = "kirin_birthday_pledges_v2";
 
 let wishes = [];
 let pledges = [];
