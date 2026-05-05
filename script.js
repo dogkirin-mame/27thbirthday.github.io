@@ -366,6 +366,7 @@ function doPayPay() {
   const selectedWish = selectedIdx >= 0 ? wishes[selectedIdx] : null;
   const wishName = selectedWish ? selectedWish.name : "未選択";
 
+  // Googleフォームへ送信
   sendToGoogleForm({
     name: senderName,
     gift: wishName,
@@ -373,16 +374,7 @@ function doPayPay() {
     message: message
   });
 
-  setTimeout(() => {
-    document.getElementById("main").style.display = "none";
-    document.getElementById("thanks").classList.add("show");
-
-    payBtn.disabled = false;
-    btnLabel.textContent = "¥" + Number(currentAmt).toLocaleString("ja-JP") + " を贈る";
-  }, 2500);
-}
-
-  // 自分のブラウザにも保存
+  // 自分のブラウザにも一応保存
   pledges.push({
     name: senderName,
     amt: currentAmt,
@@ -394,26 +386,17 @@ function doPayPay() {
 
   saveData();
 
-  // Googleフォームへ送信
-  sendToGoogleForm({
-    name: senderName,
-    gift: wishName,
-    amount: currentAmt,
-    message: message
-  });
-
-  // 画面表示を変更
-  document.getElementById("main").style.display = "none";
-  document.getElementById("thanks").classList.add("show");
-
-  renderWishes();
-  renderAdmin();
-
-  // PayPayへ移動
-  // window.open ではなく、同じタブで移動する方がスマホで安定します
+  // 2.5秒待ってから、PayPayへ進む画面を表示
   setTimeout(() => {
-    window.location.href = PAYPAY_URL;
-  }, 800);
+    document.getElementById("main").style.display = "none";
+    document.getElementById("thanks").classList.add("show");
+
+    payBtn.disabled = false;
+    btnLabel.textContent = "¥" + Number(currentAmt).toLocaleString("ja-JP") + " を贈る";
+
+    renderWishes();
+    renderAdmin();
+  }, 2500);
 }
 
 function goBack() {
