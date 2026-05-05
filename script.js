@@ -41,7 +41,7 @@ const INITIAL_WISHES = [
 // 手動で反映したい「集まった金額」
 // プレゼント名と完全一致させてください
 const MANUAL_COLLECTED_BY_WISH_NAME = {
-  "ナイキペガサス42": 0,
+  "ナイキペガサス42": 2000,
   "研究・本代": 0
 };
 
