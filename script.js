@@ -73,7 +73,7 @@ const INITIAL_WISHES = [
 const MANUAL_COLLECTED_BY_WISH_NAME = {
   "ナイキペガサス42": 11000,
   "NARS アフターグローリキッドブラッシュ": 0,
-  "アラビア　Paratiisi Plate": 0,
+  "アラビア　Paratiisi Plate": 3000,
   "アイシャドウ": 0,
   "ルームディフーザー": 0,
   "運動用の服！": 10000,
