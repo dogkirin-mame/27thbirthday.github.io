@@ -49,7 +49,7 @@ const INITIAL_WISHES = [
     price: 7000
   },
 {
-    emoji: "🌹👃",
+    emoji: "🌹",
     name: "ルームディフーザー",
     desc: "部屋のルームディフーザー難民なのでこれを機に買う！絶対！",
     price: 7000
