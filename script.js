@@ -347,14 +347,40 @@ function updateAmountDisplay() {
 
 /* ===== PayPay ===== */
 
+function openPayPay() {
+  window.location.href = PAYPAY_URL;
+}
+
 function doPayPay() {
   if (currentAmt <= 0) return;
+
+  const payBtn = document.getElementById("payBtn");
+  const btnLabel = document.getElementById("btnLabel");
+
+  payBtn.disabled = true;
+  btnLabel.textContent = "記録中...";
 
   const senderName = document.getElementById("senderName").value.trim() || "匿名";
   const message = document.getElementById("msgInput").value.trim();
 
   const selectedWish = selectedIdx >= 0 ? wishes[selectedIdx] : null;
   const wishName = selectedWish ? selectedWish.name : "未選択";
+
+  sendToGoogleForm({
+    name: senderName,
+    gift: wishName,
+    amount: currentAmt,
+    message: message
+  });
+
+  setTimeout(() => {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("thanks").classList.add("show");
+
+    payBtn.disabled = false;
+    btnLabel.textContent = "¥" + Number(currentAmt).toLocaleString("ja-JP") + " を贈る";
+  }, 2500);
+}
 
   // 自分のブラウザにも保存
   pledges.push({
